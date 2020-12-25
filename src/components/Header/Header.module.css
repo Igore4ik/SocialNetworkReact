@@ -1,0 +1,14 @@
+.header {
+  background: green;
+  min-height: 100px;
+  margin: 10px;
+}
+.img img{
+  width: 80px;
+}
+.auth, .auth a{
+  color: white;
+  float: right;
+  margin: 10px;
+  font-size: 22px;
+}

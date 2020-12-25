@@ -1,0 +1,20 @@
+.navbar {
+  background: pink;
+  flex-basis: 20%;
+  padding: 10px;
+}
+li {
+  padding: 5px;
+  list-style-type: none;
+}
+li a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+li a:hover {
+  color: grey;
+}
+.active{
+  color: gold;
+}

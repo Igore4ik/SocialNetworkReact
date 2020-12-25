@@ -1,0 +1,9 @@
+.post img {
+  width: 50px;
+  border-radius: 30%;
+}
+.countLikes{
+color:red;
+padding: 2px;
+}
+

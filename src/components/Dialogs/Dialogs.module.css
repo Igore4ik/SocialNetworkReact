@@ -1,0 +1,32 @@
+.dialogs{
+   display: flex;
+   /* flex-direction: column; */
+   justify-content: space-around;
+}
+.dialogItems{
+   width: 20%;
+}
+.dialog{
+   padding: 10px;
+}
+.dialog a{
+   text-decoration: none;
+}
+.active{
+  color: gold;
+}
+
+.dialog img{
+   width: 30px;
+   border-radius: 30%;
+   margin-right: 5px;
+}
+
+.messages{
+   
+      width: 80%;
+   }
+.message{
+   padding: 10px;
+   color: white;
+}

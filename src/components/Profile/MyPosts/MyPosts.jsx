@@ -6,8 +6,9 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 import {required,setMaxLength} from "../../utils/validators/validators";
 
 const maxLength = setMaxLength(30);
-const MyPosts = ({profilePage, addPosts}) => {
 
+const MyPosts = ({profilePage, addPosts}) => {
+console.log(profilePage,"render");
     const onAddPosts = (formData) => {
         addPosts(formData.newPost);
     };

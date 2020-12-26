@@ -1,6 +1,7 @@
 import {getProfile, getStatus, updateStatus} from "../api/api";
 
 const ADD_POST = "ADD_POST";
+const DELETE_POST = "DELETE_POST";
 const SET_PROFILE = "SET_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_STATUS = "UPDATE_STATUS";
@@ -21,6 +22,12 @@ export const addPostActionCreator = (text) => {
     return {
         type: ADD_POST,
         text
+    };
+};
+export const deletePostActionCreator = (id) => {
+    return {
+        type: DELETE_POST,
+        id
     };
 };
 export const setProfile = (profile) => {
@@ -81,6 +88,19 @@ const reducerProfilePage = (state = initialState, action) => {
                     {id: id++, text: action.text, countLikes: 0}
                 ]
             };
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(el=> el.id !== action.id)
+
+            };
+        // case DELETE_POST:
+        //     return {
+        //         ...state,
+        //         posts: [
+        //             state.posts.filter(id=> id !== action.id)
+        //         ]
+        //     };
         case SET_PROFILE:
             return {
                 ...state,

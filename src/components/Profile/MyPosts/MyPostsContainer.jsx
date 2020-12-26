@@ -4,6 +4,8 @@ import MyPosts from "./MyPosts";
 import {getProfilePage} from "../../../redux/selectors/myPostContainerSelectors";
 
 let mapStateToProps = (state) => {
+
+
   return {
     profilePage: getProfilePage(state)
   };

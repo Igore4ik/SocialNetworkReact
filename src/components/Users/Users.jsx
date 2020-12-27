@@ -12,7 +12,7 @@ const Users = (props) => {
         <div>
             {props.isFetching ? <Preloader/> : null}
 
-            {Paginator(props.totalUsersCount, props.pageSize, props.currentPage, props.setPage)}
+            {Paginator(props.totalUsersCount, props.pageSize, props.currentPage, props.setPage,10)}
 
             {props.users.map((el) => (
                 <div className={c.users} key={el.id}>

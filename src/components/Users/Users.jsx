@@ -2,36 +2,18 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import Preloader from "../Preloader/Preloader";
 import c from "./Users.module.css";
+import Paginator from "../common/Paginator/Paginator";
 
 const defaultPhoto =
     "https://us.123rf.com/450wm/yayayoy/yayayoy1511/yayayoy151100009/48712505-stock-vector-smiling-emoticon-with-open-mouth-and-smiling-eyes.jpg?ver=6";
 
 const Users = (props) => {
-    let pages = Math.ceil(props.totalUsersCount / props.pageSize);
-    let arrOfPages = [];
-    for (let i = 1; i <= pages; i++) {
-        arrOfPages.push(i);
-    }
     return (
         <div>
             {props.isFetching ? <Preloader/> : null}
-            <div>
-                {arrOfPages.map((el) => {
-                    return (
-                        <span
-                            key={el}
-                            className={
-                                props.currentPage === el ? c.activePage + " " + c.page : c.page
-                            }
-                            onClick={() => {
-                                props.setPage(el);
-                            }}
-                        >
-              {el}
-            </span>
-                    );
-                })}
-            </div>
+
+            {Paginator(props.totalUsersCount, props.pageSize, props.currentPage, props.setPage)}
+
             {props.users.map((el) => (
                 <div className={c.users} key={el.id}>
                     <div className={c.photo}>

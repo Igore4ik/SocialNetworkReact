@@ -2,8 +2,8 @@ import {followUser, getUsersAll, unFollowUser} from "../api/api";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SETUSERS";
-const SET_CURRENT_PAGE = "SETCURRENTPAGE";
+const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const FETCHING = "FETCHING";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_FOLLOW_BTN = "TOGGLE_FOLLOW_BTN";
@@ -12,7 +12,7 @@ const TOGGLE_FOLLOW_BTN = "TOGGLE_FOLLOW_BTN";
 const initialState = {
     users: [],
     pageSize: 5, // сколько юзеров отобразить на странице
-    totalUsersCount: 20, // общее кол-во юзеров  (totalCount)
+    totalUsersCount: 0, // общее кол-во юзеров  (totalCount)
     currentPage: 1, // текущая стр
     isFetching: true,
     toggleBtn: []
@@ -73,14 +73,13 @@ export const setUsersThunk = (currentPage, pageSize) => {
         getUsersAll(currentPage, pageSize).then((data) => {
             dispatch(toggleFetching(false));
             dispatch(setUsers(data.items));
-            // this.props.setTotalUsersCount(data.totalCount);
+            dispatch(setTotalUsersCount(data.totalCount));
         })
 
     }
 
 };
 export const followThunk = (userId) => {
-    return (dispatch) => {
         return (dispatch) => {
             dispatch(toggleFollowBtn(true,userId));
             unFollowUser(userId).then(data => {
@@ -90,7 +89,7 @@ export const followThunk = (userId) => {
 
         }
 
-    }
+
 
 };
 export const unFollowThunk = (userId) => {

@@ -94,13 +94,6 @@ const reducerProfilePage = (state = initialState, action) => {
                 posts: state.posts.filter(el=> el.id !== action.id)
 
             };
-        // case DELETE_POST:
-        //     return {
-        //         ...state,
-        //         posts: [
-        //             state.posts.filter(id=> id !== action.id)
-        //         ]
-        //     };
         case SET_PROFILE:
             return {
                 ...state,

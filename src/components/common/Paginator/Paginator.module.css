@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+}
+.wrapper button{
+  display: inline-block;
+}
+.wrapper .page{
+  cursor: pointer;
+  padding: 5px;
+}
+.wrapper .activePage{
+  font-weight: bold;
+
+}

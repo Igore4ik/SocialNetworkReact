@@ -4,9 +4,9 @@ import {
     setCurrentPage,
     followThunk,
     unFollowThunk,
-    // setTotalUsersCount,
+    setTotalUsersCount,
     toggleFollowBtn
-} from "./../../redux/reducer-users";
+} from "../../redux/reducer-users";
 import Users from "./Users";
 import {setUsersThunk} from "../../redux/reducer-users";
 import {
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
 // };
 export default connect(mapStateToProps, {
     setCurrentPage,
-    // setTotalUsersCount,
+    setTotalUsersCount,
     toggleFollowBtn,
     setUsersThunk,
     followThunk,

@@ -37,7 +37,6 @@ const Dialogs = ({dialogsPage, addMessage}) => {
 
 //создаем форму с использованием redux-form и на сабмит цепляем метод handleSubmit, который соберет все данные с формы
 const Form = (props) => {
-    // debugger
     return (
         <form onSubmit={props.handleSubmit}>
             {/*Textarea -мы создали свою компоненту, чтобы при ошибке валидации показывать

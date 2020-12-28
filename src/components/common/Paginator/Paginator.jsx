@@ -15,7 +15,7 @@ const Paginator = (totalUsersCount, pageSize, currentPage, setPage,portionSize=1
     return (
 
         <div className={c.wrapper}>
-            {portionNumber >1 && <button onClick={()=>setPortionNumber(portionNumber-1)}>Prev</button>}
+            {portionNumber >1 && <button  onClick={()=>setPortionNumber(portionNumber-1) }>Prev</button>}
 
             {arrOfPages
                 .filter(page=> page>=leftPageOfPortion && page<=rightPageOfPortion)

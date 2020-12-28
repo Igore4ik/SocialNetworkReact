@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
+// import Settings from "./components/Settings/Settings";
 import "./App.css";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import {isInitialiseApp} from "./redux/app-reducer";
 import Preloader from "./components/Preloader/Preloader";
 import {getInitialized} from "./redux/selectors/appSelectors";
+import SettingsContainer from "./components/Settings/SettingsContainer";
 
  class App extends Component {
     componentDidMount() {
@@ -34,7 +35,7 @@ import {getInitialized} from "./redux/selectors/appSelectors";
                             <Route path="/news" component={News}/>
                             <Route path="/music" component={Music}/>
                             <Route path="/users" render={() => <UsersContainer/>}/>
-                            <Route path="/settings" component={Settings}/>
+                            <Route path="/settings" render={()=><SettingsContainer/>}/>
                             <Route path="/login" component={Login}/>
                         </div>
                     </section>

@@ -1,6 +1,7 @@
-import {getProfile, getStatus, updateStatus} from "../api/api";
+import {getProfile, getStatus, setPhoto, updateProfileSettings, updateStatus} from "../api/api";
 
 const ADD_POST = "ADD_POST";
+const ADD_PHOTO = "ADD_PHOTO";
 const DELETE_POST = "DELETE_POST";
 const SET_PROFILE = "SET_PROFILE";
 const SET_STATUS = "SET_STATUS";
@@ -22,6 +23,12 @@ export const addPostActionCreator = (text) => {
     return {
         type: ADD_POST,
         text
+    };
+};
+export const addPhoto = (photos) => {
+    return {
+        type: ADD_PHOTO,
+        photos
     };
 };
 export const deletePostActionCreator = (id) => {
@@ -59,6 +66,27 @@ export const setProfileThunk = (userId) => {
             });
     }
 };
+export const uploadProfileThunk = (formData) => {
+    return (dispatch) => {
+        updateProfileSettings(formData)
+            .then((data) => {
+                if (data.resultCode === 0) dispatch(setProfile(data));
+                // dispatch(setProfile(data));
+            });
+    }
+};
+//
+export const setPhotoThunk = (photoFile) => {
+    return (dispatch) => {
+        //setPhoto -метод из файла апи для отправки фото на сервер
+        setPhoto(photoFile)
+            .then((data) => {
+                //если resultCode === 0 т.е. запрос удачный то диспатчим добавление фото,
+                // которое вернулось с сервера в ответе в стор
+                if (data.resultCode === 0) dispatch(addPhoto(data.data.photos));
+            });
+    }
+};
 
 export const setStatusThunk = (userId) => {
     return (dispatch) => {
@@ -87,6 +115,10 @@ const reducerProfilePage = (state = initialState, action) => {
                     ...state.posts,
                     {id: id++, text: action.text, countLikes: 0}
                 ]
+            };
+        case ADD_PHOTO:
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
             };
         case DELETE_POST:
             return {

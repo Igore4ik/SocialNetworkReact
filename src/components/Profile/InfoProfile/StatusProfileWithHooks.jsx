@@ -26,7 +26,7 @@ const StatusProfileWithHooks = (props) => {
     return (
         <div className={c.desc}>
             {/*//отображаем полное имя полученого профиля*/}
-            <div>{props.profile.fullName}</div>
+            {/*<div>{props.profile.fullName}</div>*/}
             <div>
                 {
                     // отображаем режим с статусом и если он нал - используем по умолчанию

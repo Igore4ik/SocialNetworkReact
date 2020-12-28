@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
 });
 const maxLength = setMaxLength(25);
 const LoginForm = (props) => {
-    // const hasError = props.meta.touched && props.meta.error;
     return (
 
         <form onSubmit={props.handleSubmit} className={c.form} >

@@ -47,7 +47,7 @@ class StatusProfile extends Component {
         return (
             <div className={c.desc}>
                 {/*//отображаем полное имя полученого профиля*/}
-                <div>{this.props.profile.fullName}</div>
+                {/*<div>{this.props.profile.fullName}</div>*/}
                 <div>
                     {
                         // отображаем режим с статусом и если он нал - используем по умолчанию

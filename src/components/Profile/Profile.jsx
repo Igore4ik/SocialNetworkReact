@@ -6,7 +6,11 @@ import c from "./Profile.module.css";
 const Profile = (props) => {
   return (
     <section className={c.profile}>
-      <InfoProfile profile={props.profile} status={props.status} updateStatusThunk={props.updateStatusThunk}/>
+      <InfoProfile
+          isOwner={props.isOwner}
+          setPhotoThunk={props.setPhotoThunk}
+          profile={props.profile} status={props.status}
+          updateStatusThunk={props.updateStatusThunk}/>
       <MyPostsContainer />
     </section>
   );

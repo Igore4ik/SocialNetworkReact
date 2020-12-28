@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {setProfileThunk,setStatusThunk} from "./../../redux/reducer-profilePage";
+import {setProfileThunk,setStatusThunk} from "../../redux/reducer-profilePage";
 import {withRouter} from "react-router-dom";
 import {withLoginRedirect} from "../LoginRedirect/LoginRedirect";
 import {compose} from "redux";
@@ -9,10 +9,10 @@ import {updateStatusThunk} from "../../redux/reducer-profilePage";
 import {getAutorizedUserId, getProfileUser, getStatusUser} from "../../redux/selectors/profileContainerSelectors";
 
 class ProfileComponent extends Component {
-    componentDidMount() {
-      // на странице с юзерами мы нажали на профиль и в юрл добавили айди пользователя
-      // теперь мы с юрл получаем айди с помощью метода матч в парамс и наше свойство - юзерАйди
-      // для того чтобы использоать матч мы обернули нашу компоненту withRouter в функции компосе
+    refreshPage(){
+        // на странице с юзерами мы нажали на профиль и в юрл добавили айди пользователя
+        // теперь мы с юрл получаем айди с помощью метода матч в парамс и наше свойство - юзерАйди
+        // для того чтобы использоать матч мы обернули нашу компоненту withRouter в функции компосе
         let userId = this.props.match.params.userId;
         //если профиля нет, т.е. при входе в систему берем айди залогиненого юзера(отображаем свой профиль)
         if (!userId) userId = this.props.autorizedUserId;
@@ -21,11 +21,20 @@ class ProfileComponent extends Component {
         this.props.setProfileThunk(userId);
         this.props.setStatusThunk(userId);
     }
+    componentDidMount() {
+           this.refreshPage();
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.match.params.userId !== prevProps.match.params.userId){
+            this.refreshPage();
+        }
+    }
 
     render() {
         return (
 
-            <Profile {...this.props} />
+            <Profile {...this.props}
+            />
         )
     }
 }
@@ -37,13 +46,6 @@ const mapStateToProps = (state) => {
         autorizedUserId: getAutorizedUserId(state)
     };
 };
-// const mapStateToProps = (state) => {
-//     return {
-//         profile: state.profilePage.profile,
-//         status: state.profilePage.status,
-//         autorizedUserId: state.auth.userId
-//     };
-// };
 
 //конект принимает стейт(мапСтейтТуПропс), и функцию(в нашем случае санку) и возвращает измененный стейт
 //withLoginRedirect проверяет залогинен ли пользователь, если нет то перенаправляет на страницу с логином

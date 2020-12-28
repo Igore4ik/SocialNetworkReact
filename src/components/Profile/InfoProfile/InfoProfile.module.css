@@ -4,7 +4,8 @@
 }
 .userProfile{
   margin: 15px;
-  color: white;
+  /*color: white;*/
+  border-bottom: 3px solid black;
 }
 .photo img {
   width: 200px;
@@ -12,4 +13,19 @@
 .desc input{
   margin: 10px;
   color: blue;
+}
+.inpPhoto{
+  margin: 5px;
+  padding: 5px;
+}
+.profile{
+  margin: 10px;
+  padding: 10px;
+  margin-left: 0;
+  padding-left: 0;
+}
+.item{
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
 }

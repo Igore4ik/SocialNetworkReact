@@ -79,3 +79,24 @@ export const loginOut = () => {
             return response.data;
         });
 };
+export const setPhoto = (photoFile) => {
+    const formData = new FormData();
+     formData.append("image", photoFile);
+    return instance
+        .put(`profile/photo`, formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((response) => {
+            return response.data;
+        });
+};
+export const updateProfileSettings = (formData) => {
+
+    return instance
+        .put(`profile`, formData)
+        .then((response) => {
+            return response.data;
+        });
+};

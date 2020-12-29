@@ -3,19 +3,21 @@ import {Field, reduxForm} from 'redux-form';
 import c from "./Login.module.css";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required, setMaxLength} from "../utils/validators/validators";
-import {loginThunk} from "../../redux/authReducer";
+import { loginThunk} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {getIsLogin} from "../../redux/selectors/loginRedirectSelectors";
 
 const mapStateToProps = (state) => ({
+    captcha: state.auth.captcha,
     isLogin: getIsLogin(state)
 });
 const maxLength = setMaxLength(25);
 const LoginForm = (props) => {
+    console.log(props.captcha)
     return (
 
-        <form onSubmit={props.handleSubmit} className={c.form} >
+        <form onSubmit={props.handleSubmit} className={c.form}  >
             <div>
                 <Field placeholder={"Login"} name="login" component={Input} type="email" validate={[required,maxLength]}/>
                 {/*<Field placeholder={"Login"} name="login" component="input" type="text"/>*/}
@@ -27,8 +29,16 @@ const LoginForm = (props) => {
                 <Field name="rememberMe" component="input" type="checkbox"/>
             </div>
 
+            {
+                props.captcha &&  <div >
+
+                    <img src={props.captcha} alt=""/>
+                    <Field placeholder={"Symbols"} name="captcha" component={Input} type="text" validate={[required,maxLength]} />
+                </div>
+            }
                 {
                    props.error &&  <div className={c.formError}>
+                       <p>error</p>
                               {props.error}
 
                     </div>
@@ -46,9 +56,9 @@ const LoginReduxForm = reduxForm({
 })(LoginForm);
 
 const Login = (props) => {
-     // debugger
     const onSubmit = (formData) => {
-        props.loginThunk(formData.login,formData.password,formData.rememberMe)
+        props.loginThunk(formData.login,formData.password,formData.rememberMe, formData.captcha);
+
     };
     return (
 
@@ -56,7 +66,7 @@ const Login = (props) => {
           {  props.isLogin
               ? <Redirect to="/profile"/>
              :<> <h1 className={c.title}>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/></>}
+            <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha} /></>}
         </>
     )
 };

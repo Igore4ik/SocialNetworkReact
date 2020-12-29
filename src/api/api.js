@@ -60,13 +60,14 @@ export const isLoginUser = () => {
             return response.data;
         })
 };
-export const loginEnter = (email, password, rememberMe) => {
+export const loginEnter = (email, password, rememberMe=false,captcha=null) => {
     return instance
         .post(`auth/login`,
             {
                 email,
                 password,
-                rememberMe
+                rememberMe,
+                captcha
             })
         .then((response) => {
             return response.data;
@@ -96,6 +97,14 @@ export const updateProfileSettings = (formData) => {
 
     return instance
         .put(`profile`, formData)
+        .then((response) => {
+            return response.data;
+        });
+};
+export const secirityCaptca = () => {
+
+    return instance
+        .get(`security/get-captcha-url`)
         .then((response) => {
             return response.data;
         });

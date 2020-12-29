@@ -15,7 +15,7 @@ let initialState = {
         {id: 3, text: "Nice to meet you", countLikes: 123}
     ],
     profile: null,
-    status: ""
+    status: "Samurai"
 };
 
 //action creators
@@ -43,10 +43,10 @@ export const setProfile = (profile) => {
         profile
     };
 };
-export const setStatus = (status) => {
+export const setStatus = (userId) => {
     return {
         type: SET_STATUS,
-        status
+        userId
     };
 };
 export const updateStatusDisp = (status) => {

@@ -9,7 +9,8 @@ const Profile = (props) => {
       <InfoProfile
           isOwner={props.isOwner}
           setPhotoThunk={props.setPhotoThunk}
-          profile={props.profile} status={props.status}
+          profile={props.profile}
+          status={props.status}
           updateStatusThunk={props.updateStatusThunk}/>
       <MyPostsContainer />
     </section>

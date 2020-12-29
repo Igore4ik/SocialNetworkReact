@@ -1,22 +1,32 @@
-import {isLoginUser, loginEnter, loginOut} from "../api/api";
+import {isLoginUser, loginEnter, loginOut, secirityCaptca} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const IS_USER_LOGIN = "IS_USER_LOGIN";
+const SET_CAPTCHA = "SET_CAPTCHA";
 
 //state by default
 const initialState = {
     userId: null,
     login: null,
     email: null,
-    isLogin: false
+    isLogin: false,
+    captcha: null
+    // captcha: "https://social-network.samuraijs.com/HelpApp/HelpApp/Captcha?w=200\u0026h=100\u0026c=Ud28GoFQihR3W%2BwTUEdEKA%3D%3D"
 };
 
 //action creators
 export const setLogin = (userId,login,email,isLogin) => {
     return {
-        type: IS_USER_LOGIN, data: {userId,login,email},isLogin
+        type: IS_USER_LOGIN, userId,login,email,isLogin
     };
 };
+export const setCaptcha = (captcha) => {
+    // debugger
+    return {
+        type: SET_CAPTCHA,
+        captcha
+    }
+}
 
 
 //thunk creators
@@ -28,16 +38,27 @@ export const isLoginThunk = () => (dispatch) => {
             }
         });
 };
-export const loginThunk = (email,password,rememberMe) => {
+export const loginThunk = (email,password,rememberMe,captcha) => {
 
     return (dispatch) => {
-        loginEnter(email,password,rememberMe).then((data) => {
+        loginEnter(email,password,rememberMe,captcha).then((data) => {
             if(data.resultCode ===0){
                 dispatch(isLoginThunk());
             }else{
+                if(data.resultCode ===10){
+                  dispatch(captchaThunk());
+                }
                 let error = data.messages.length > 0 ? data.messages[0] : "Some error";
                 dispatch(stopSubmit("login", {_error: error}))
             }
+        });
+    }
+};
+export const captchaThunk = () => {
+    return (dispatch) => {
+        secirityCaptca().then((data) => {
+                dispatch(setCaptcha(data.url));
+
         });
     }
 };
@@ -56,10 +77,18 @@ const authReducer = (state = initialState, action) => {
     if (action.type === IS_USER_LOGIN) {
         return {
             ...state,
-            ...action.data,
+            userId: action.userId,
+            login: action.login,
+            email: action.email,
             isLogin: action.isLogin
         };
-    } else {
+    }else if(action.type === SET_CAPTCHA) {
+     return {
+         ...state,
+         captcha: action.captcha
+     }
+    }
+    else {
         return state;
     }
 };
